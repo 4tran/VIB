@@ -1,4 +1,4 @@
-# JSIB
+# Vanilla imageboard
 
 ## General information
 ~~JavaScript imageboard, or JSIB for short, is an attempt to create an imageboard software that is based on javascript rather than PHP, python, perl etc.~~
