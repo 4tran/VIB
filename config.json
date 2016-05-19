@@ -2,5 +2,6 @@
     "user": "root",
     "pass": "password",
     "db": "vib",
-    "ip": "localhost"
+    "ip": "localhost",
+    "site_name" : "VIB"
 }
