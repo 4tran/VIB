@@ -10,9 +10,7 @@ if (($users[0][0] == $_POST["user"]) && ($users[0][1] == $_POST["pass"])) {
   $url = $db->real_escape_string($_POST["url"]);
   $name = $db->real_escape_string($_POST["name"]);
   $db->query("INSERT INTO boards (url, board_name) VALUES
-    ('$url', '$name') WHERE NOT EXISTS (
-    SELECT url FROM table_listnames WHERE url = '$url'
-  )");
+    ('$url', '$name')");
 
   $db->query("DROP TABLE IF EXISTS posts_".$url."");
   $db->query("CREATE TABLE posts_".$url." (
