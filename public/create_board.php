@@ -22,6 +22,21 @@ if (($users[0][0] == $_POST["user"]) && ($users[0][1] == $_POST["pass"])) {
     timestamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
   )");
+  $url = $_POST["url"];
+  if (!file_exists("$url")) {
+    mkdir("$url", 0777, true);
+  }
+  $b_conf = fopen("$url/config.json", "w");
+  $txt = "{\n";
+  fwrite($b_conf, $txt);
+  $txt = '    "url": "' . $url . '",' . "\n";
+  fwrite($b_conf, $txt);
+  $txt = '    "name": "' . $_POST['name'] . '"' . "\n";
+  fwrite($b_conf, $txt);
+  $txt = "}\n";
+  fwrite($b_conf, $txt);
+  fclose($b_conf);
+  copy("../res/temps/index.php", "$url/index.php");
   echo "Board succesfully created or wiped.";
 }
 else {
