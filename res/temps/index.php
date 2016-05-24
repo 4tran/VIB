@@ -21,6 +21,7 @@ echo "<br/><br/>";
 <?php echo "<title>Home - " . $board_config['name'] . "</title>"; ?>
 <form action="../post.php" method="post">
 <?php echo "<input type=\"hidden\" name=\"url\" value=\"" . $board_config['url'] . "\">"; ?>
+<?php echo "<input type=\"hidden\" name=\"type\" value=\"thread\">"; ?>
 Name: <input type="text" name="name" style="margin-bottom:5px"><br/>
 <textarea name="content" rows="5" cols="40" style="margin-bottom:5px"></textarea><br/>
 <input type="submit">
@@ -31,7 +32,7 @@ $db->real_query("SELECT * FROM posts_".$url." ORDER BY id DESC LIMIT 10");
 $res = $db->use_result();
 while ($row = $res->fetch_assoc()) {
   if($row['id'] == $row['op']) {
-    echo "By: " . $row['name'] . ". Created: " . $row['timestamp'] . " ID: " . $row['id'] . "<br/>";
+    echo "By: " . $row['name'] . ". Created: " . $row['timestamp'] . " ID: " . $row['id'] . "<a href=\"" . $row['id'] . "\"> [reply]</a>" . "<br/>";
     echo $row['content'] . "<br/><br/>";
   }
 }
