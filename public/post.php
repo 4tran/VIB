@@ -1,12 +1,10 @@
 <?php
 require("../res/config.php");
-(board) post count + 1
-id = (board) post count
-board = (board)
-name = post name
-content = post content
-$db->query("INSERT INTO posts (id, board_url, name, content) VALUES
-(1,	'test',	'Test',	'Test post.')");
-$db-query(INSERT INTO posts ()$_POST["name"]);
-$_POST["content"];
+$url = $db->real_escape_string($_POST["url"]);
+$name = $db->real_escape_string($_POST["name"]);
+$content = $db->real_escape_string($_POST["content"]);
+$db->query("INSERT INTO posts_".$url." (name, content, timestamp)
+VALUES ('$name', '$content', now())");
+$url = $_POST['url'];
+echo "<a href=\"$url\">Click here to go back to the board home.</a>";
 ?>
