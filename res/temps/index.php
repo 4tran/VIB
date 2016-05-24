@@ -5,6 +5,7 @@ if ($db->connect_errno) {
   echo "Failed to connect to database. Please check config.json";
 }
 $board_config = json_decode(file_get_contents("config.json"), true);
+$url = $db->real_escape_string($board_config['url']);
 
 $db->real_query("SELECT * FROM boards");
 $res = $db->use_result();
@@ -16,6 +17,7 @@ echo "<br/><br/>";
 
 <html>
 <body>
+
 <?php echo "<title>Home - " . $board_config['name'] . "</title>"; ?>
 <form action="../post.php" method="post">
 <?php echo "<input type=\"hidden\" name=\"url\" value=\"" . $board_config['url'] . "\">"; ?>
@@ -25,7 +27,6 @@ Name: <input type="text" name="name" style="margin-bottom:5px"><br/>
 </form>
 
 <?php
-$url = $db->real_escape_string($board_config['url']);
 $db->real_query("SELECT * FROM posts_".$url." ORDER BY id DESC LIMIT 10");
 $res = $db->use_result();
 while ($row = $res->fetch_assoc()) {
