@@ -18,6 +18,7 @@ if (($users[0][0] == $_POST["user"]) && ($users[0][1] == $_POST["pass"])) {
     name text NOT NULL,
     content text NOT NULL,
     op text NOT NULL,
+    image text NOT NULL,
     timestamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
   )");

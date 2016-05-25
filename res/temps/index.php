@@ -20,16 +20,29 @@ echo "</div><br/><br/>";
 <head>
   <link rel="stylesheet" type="text/css" href="/style/main.css">
   <?php echo "<title>Home - " . $board_config['name'] . "</title>"; ?>
+  <script>
+  var big = 0;
+  function resize(id) {
+    if (big == 0) {
+      document.getElementById(id).style.height = "initial";
+      big = 1;
+    }
+    else {
+      document.getElementById(id).style.height = "150px";
+      big = 0;
+    }
+  }
+  </script>
 </head>
 <body>
 
 <div class="post">
-<form action="../post.php" method="post">
+<form action="../post.php" method="post" enctype="multipart/form-data">
 <?php echo "<input type=\"hidden\" name=\"url\" value=\"" . $board_config['url'] . "\">"; ?>
 <?php echo "<input type=\"hidden\" name=\"type\" value=\"thread\">"; ?>
 <p>Name: </p><input type="text" name="name" style="margin-bottom:5px"><br/>
 <textarea name="content" rows="5" cols="40" style="margin-bottom:5px"></textarea><br/>
-<input type="file" name="image" value="Choose Image"></br>
+<input type="file" name="image" id="image"><br/>
 <input type="submit" value="Post">
 </form>
 </div>
@@ -40,7 +53,20 @@ $res = $db->use_result();
 while ($row = $res->fetch_assoc()) {
   if($row['id'] == $row['op']) {
     echo "<div class=\"op\">";
-    echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp'] . " ID: " . $row['id'] . "<a href=\"" . $row['id'] . "\"> [reply]</a>" . "</p><br/>";
+    if ($row['name'] == "" && $row['image'] != "") {
+      echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp'] . " ID: " . $row['id'] . "<a href=\"" . $row['id'] . "\"> [reply]</a></p><br/>";
+      echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\"" . $row[id] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
+    }
+    else if ($row['name'] != "" && $row['image'] == "") {
+      echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp'] . " ID: " . $row['id'] . "<a href=\"" . $row['id'] . "\"> [reply]</a></p><br/>";
+    }
+    else if ($row['name'] != "" && $row['image'] != "") {
+      echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp'] . " ID: " . $row['id'] . "<a href=\"" . $row['id'] . "\"> [reply]</a></p><br/>";
+      echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\"" . $row[id] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
+    }
+    else if ($row['name'] == "" && $row['image'] == "") {
+      echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp'] . " ID: " . $row['id'] . "<a href=\"" . $row['id'] . "\"> [reply]</a></p><br/>";
+    }
     echo "<p>" . htmlspecialchars($row['content']) . "</p><br/><br/>";
     echo "</div>";
   }

@@ -44,6 +44,31 @@ div.reply p {
   text-align: left;
   word-wrap: break-word;
 }
+div.op {
+  font-family: 'Vollkorn', serif;
+  border: 1px;
+  border-style: hidden;
+  border-color: #CDCDCD;
+  width: 30%;
+  padding: 5px;
+  text-align: left;
+}
+div.op p {
+  font-family: 'Vollkorn', serif;
+  width: auto;
+  text-align: left;
+  word-wrap: break-word;
+}
+div.image img {
+  width: inherit;
+  height:inherit;
+  float: left;
+}
+div.image {
+  height:150px;
+  padding: 5px;
+  margin: 0;
+}
 div.header {
   text-align: left;
 }
