@@ -17,6 +17,7 @@ if (($users[0][0] == $_POST["user"]) && ($users[0][1] == $_POST["pass"])) {
     id int(11) NOT NULL AUTO_INCREMENT,
     name text NOT NULL,
     content text NOT NULL,
+    op text NOT NULL,
     timestamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
   )");

@@ -1,0 +1,71 @@
+@import url(https://fonts.googleapis.com/css?family=Vollkorn);
+
+body {
+  background: #323232;
+  font-family: 'Vollkorn', serif;
+  text-align: center;
+}
+p {
+  font-family: 'Vollkorn', serif;
+  white-space: pre-wrap;
+  display: inline;
+  color: #CDCDCD;
+  text-align: left;
+}
+div.post {
+  font-family: 'Vollkorn', serif;
+  border: 1px;
+  border-style: solid;
+  border-color: #CDCDCD;
+  display: inline-block;
+  padding: 5px;
+  margin: 0 auto;
+  background-color: #1E1E1E;
+  text-align: left;
+}
+div.op, div.reply {
+  font-family: 'Vollkorn', serif;
+  margin: 10px;
+  text-align: left;
+}
+div.reply {
+  font-family: 'Vollkorn', serif;
+  margin-left: 20px;
+  border: 1px;
+  border-style: solid;
+  border-color: #CDCDCD;
+  width: 30%;
+  padding: 5px;
+  text-align: left;
+}
+div.reply p {
+  font-family: 'Vollkorn', serif;
+  width: auto;
+  text-align: left;
+  word-wrap: break-word;
+}
+div.header {
+  text-align: left;
+}
+p.info{
+  font-size: 110%;
+  color: #467546;
+}
+textarea, input, textarea:focus, input:focus {
+  font-family: 'Vollkorn', serif;
+  background: #323232;
+  color: white;
+  border: none;
+  outline: 0;
+  text-align: left;
+  margin-bottom: 5px;
+}
+input {
+  width: 100%;
+}
+a:link, a:visited, a:hover,a:active {
+  font-family: 'Vollkorn', serif;
+  text-decoration: none;
+  color: white;
+  text-align: left;
+}
