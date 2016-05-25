@@ -98,7 +98,9 @@ else {
         echo "<p>There was an error uploading your file.</p>";
     }
 }
-$id = $_POST['id'];
+if ($_POST['type'] == "reply") {
+  $id = $_POST['id'];
+}
 ?>
 <?php echo "<br/><a href=\"/$url/\">Return to the board home.</a></br>";
 echo "<a href=\"/$url/$id/\">Return to the thread.</a></div>"; ?>
