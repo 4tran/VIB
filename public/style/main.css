@@ -36,6 +36,7 @@ div.reply {
   border-color: #CDCDCD;
   width: 30%;
   padding: 5px;
+  padding-bottom: 0px;
   text-align: left;
 }
 div.reply p {
@@ -60,11 +61,6 @@ div.op p {
   word-wrap: break-word;
 }
 div.image img {
-  width: inherit;
-  height:inherit;
-  float: left;
-}
-div.image {
   height:150px;
   padding: 5px;
   margin: 0;
@@ -93,4 +89,25 @@ a:link, a:visited, a:hover,a:active {
   text-decoration: none;
   color: white;
   text-align: left;
+}
+div.recent #latest_posts {
+  text-align: center;
+  border-bottom: 1px;
+  border-style: solid;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-color: #CDCDCD;
+  color: #CDCDCD;
+  margin: 0px;
+}
+div.recent {
+  text-align: left;
+  float: left;
+  border: 1px;
+  border-style: solid;
+  border-color: #CDCDCD;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0px;
 }

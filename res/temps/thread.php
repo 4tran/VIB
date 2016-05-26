@@ -12,7 +12,7 @@ $db->real_query("SELECT * FROM boards");
 $res = $db->use_result();
 echo "<div class=\"header\">";
 while ($row = $res->fetch_assoc()) {
-  echo "<a href=\"/" . $row['url'] . "/\">" . "[" . $row['url'] . "]" .  "</a>";
+  echo "<a href=\"/" . $row['url'] . "/\">" . "[" . $row['url'] . "]" .  "</a> <p> </p><p> </p>";
 }
 echo "</div><br/><br/>";
 ?>
