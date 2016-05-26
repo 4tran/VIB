@@ -20,19 +20,6 @@ echo "</div><br/><br/>";
 <head>
   <link rel="stylesheet" type="text/css" href="/style/main.css">
   <?php echo "<title>Home - " . $board_config['name'] . "</title>"; ?>
-  <script>
-  var big = 0;
-  function resize(id) {
-    if (big == 0) {
-      document.getElementById(id).style.height = "initial";
-      big = 1;
-    }
-    else {
-      document.getElementById(id).style.height = "150px";
-      big = 0;
-    }
-  }
-  </script>
 </head>
 <body>
 
@@ -48,7 +35,7 @@ echo "</div><br/><br/>";
 </div>
 
 <?php
-$db->real_query("SELECT * FROM posts_".$url." ORDER BY id DESC LIMIT 10");
+$db->real_query("SELECT * FROM posts_".$url." ORDER BY id DESC");
 $res = $db->use_result();
 while ($row = $res->fetch_assoc()) {
   if($row['id'] == $row['op']) {
@@ -72,6 +59,7 @@ while ($row = $res->fetch_assoc()) {
   }
 }
 ?>
-
+<script type="text/javascript" src="/js/image-resize.js"></script>
+<script type="text/javascript" src="/js/quote.js"></script>
 </body>
 </html>

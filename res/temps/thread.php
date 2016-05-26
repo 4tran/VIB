@@ -21,19 +21,6 @@ echo "</div><br/><br/>";
 <head>
   <link rel="stylesheet" type="text/css" href="/style/main.css">
   <?php echo "<title>/" . $board_config['url'] . "/</title>"; ?>
-  <script>
-  var big = 0;
-  function resize(id) {
-    if (big == 0) {
-      document.getElementById(id).style.height = "initial";
-      big = 1;
-    }
-    else {
-      document.getElementById(id).style.height = "150px";
-      big = 0;
-    }
-  }
-  </script>
 </head>
 <body>
 
@@ -95,6 +82,7 @@ while ($row = $res->fetch_assoc()) {
   }
 }
 ?>
-
+<script type="text/javascript" src="/js/image-resize.js"></script>
+<script type="text/javascript" src="/js/quote.js"></script>
 </body>
 </html>
