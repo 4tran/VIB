@@ -37,6 +37,10 @@ echo "</div><br/><br/>";
 </div>
 
 <?php
+$url = $board_config['url'];
+$re = "/^^(>[a-zA-Z0-9_ ]*$)/mi";
+$subst = "<p class=\"quote\">$1</p>";
+$re1 = "/^^(>>(\\d+))/mi";
 $db->real_query("SELECT * FROM posts_".$url." ORDER BY id ASC");
 $res = $db->use_result();
 while ($row = $res->fetch_assoc()) {
@@ -57,7 +61,13 @@ while ($row = $res->fetch_assoc()) {
       else if ($row['name'] == "" && $row['image'] == "") {
         echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
       }
-      echo "<p>" . htmlspecialchars($row['content']) . "</p><br/><br/>";
+      $op = $row['op'];
+      $subst1 = "<a href=\"/$url/$2\">$1</a>";
+      $str = str_replace("\r\n", "\n", $row['content']);
+      $str = str_replace("\r", "\n", $str);
+      $content = preg_replace($re, $subst, $str);
+      $content = preg_replace($re1, $subst1, $content);
+      echo "<p>" . nl2br($content) . "</p><br/><br/>";
       echo "</div>";
     }
     else {
@@ -76,7 +86,13 @@ while ($row = $res->fetch_assoc()) {
       else if ($row['name'] == "" && $row['image'] == "") {
         echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
       }
-      echo "<p>" . htmlspecialchars($row['content']) . "</p><br/><br/>";
+      $op = $row['op'];
+      $subst1 = "<a href=\"/$url/$2\">$1</a>";
+      $str = str_replace("\r\n", "\n", $row['content']);
+      $str = str_replace("\r", "\n", $str);
+      $content = preg_replace($re, $subst, $str);
+      $content = preg_replace($re1, $subst1, $content);
+      echo "<p>" . nl2br($content) . "</p><br/><br/>";
       echo "</div>";
     }
   }

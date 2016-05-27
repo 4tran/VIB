@@ -4,10 +4,10 @@ body {
   background: #323232;
   font-family: 'Vollkorn', serif;
   text-align: center;
+  color: #CDCDCD;
 }
 p {
   font-family: 'Vollkorn', serif;
-  white-space: pre-wrap;
   display: inline;
   color: #CDCDCD;
   text-align: left;
@@ -71,6 +71,9 @@ div.header {
 p.info{
   font-size: 110%;
   color: #467546;
+}
+p.quote {
+  color: #7CA27C;
 }
 textarea, input, textarea:focus, input:focus {
   font-family: 'Vollkorn', serif;
