@@ -3,7 +3,13 @@ require("../res/config.php");
 $url = $db->real_escape_string($_POST["url"]);
 $name = $db->real_escape_string($_POST["name"]);
 $content = $db->real_escape_string($_POST["content"]);
-$id = 0;
+$op = 0;
+
+$re = "/^^(>[a-zA-Z0-9_ \~\!\@\#\$\%\^\&\*\(\)\+\-\=\`\{\}\|\[\]\\\:\"\;\'\?\,\.\/]*$)/mi";
+$re1 = "/(<a href=\"(.*)\">(.*)(.*))*$/mi";
+$re3 = "/^(>>(\\d+))*/mi";
+$subst = "<p class=\"quote\">$1</p>";
+$subst1 = "$1";
 
 if($_POST['type'] == "thread") {
   $db->real_query("SELECT id FROM posts_".$url." ORDER BY id DESC LIMIT 1");
@@ -16,6 +22,42 @@ if($_POST['type'] == "thread") {
 
   $db->query("INSERT INTO posts_".$url." (name, content, op, timestamp)
   VALUES ('$name', '$content', '$id', now())");
+
+  $db->real_query("SELECT content FROM posts_".$url." ORDER BY id DESC LIMIT 1");
+  $res = $db->use_result();
+  while ($row = $res->fetch_assoc()) {
+    $content = $row['content'];
+  }
+
+  $str = str_replace("\r\n", "\n", $content);
+  $str = str_replace("\r", "\n", $str);
+  $content = preg_replace($re, $subst, $str);
+  $content = preg_replace($re1, $subst1, $content);
+
+  preg_match_all($re3, $content, $matches);
+  $ids = $matches[2];
+  $ops = array();
+  foreach ($ids as $x) {
+    $db->real_query("SELECT op FROM posts_".$url." WHERE id = '$x'");
+    $res = $db->use_result();
+    while ($row = $res->fetch_assoc()) {
+      array_push($ops, $row['op']);
+    }
+  }
+
+  for ($i = 0; $i < count($ops); $i++) {
+    $x = $ids[$i];
+    $y = $ops[$i];
+    $re4 = "/^(>>($x))*/mi";
+    $subst4 = "<a href=\"/$url/$y#$x\">$1</a>";
+    $content = preg_replace($re4, $subst4, $content);
+  }
+
+  $content = $db->real_escape_string($content);
+  $db->query("UPDATE posts_".$url." SET
+  content = '$content'
+  WHERE id = '$id'");
+
   $url = $_POST['url'];
 
   if (!file_exists("$url/$id")) {
@@ -36,8 +78,48 @@ if($_POST['type'] == "thread") {
 }
 else if ($_POST['type'] == "reply") {
   $id = $db->real_escape_string($_POST["id"]);
+  $url = $db->real_escape_string($_POST["url"]);
+  $content = $db->real_escape_string($_POST["content"]);
   $db->query("INSERT INTO posts_".$url." (name, content, op, timestamp)
   VALUES ('$name', '$content', '$id', now())");
+
+  $db->real_query("SELECT content, id FROM posts_".$url." ORDER BY id DESC LIMIT 1");
+  $res = $db->use_result();
+  while ($row = $res->fetch_assoc()) {
+    $content = $row['content'];
+    $id = $row['id'];
+  }
+
+  $str = str_replace("\r\n", "\n", $content);
+  $str = str_replace("\r", "\n", $str);
+  $content = preg_replace($re, $subst, $str);
+  $content = preg_replace($re1, $subst1, $content);
+
+  preg_match_all($re3, $content, $matches);
+  $ids = $matches[2];
+  $ops = array();
+  foreach ($ids as $x) {
+    $db->real_query("SELECT op FROM posts_".$url." WHERE id = '$x'");
+    $res = $db->use_result();
+    while ($row = $res->fetch_assoc()) {
+      array_push($ops, $row['op']);
+    }
+  }
+
+  for ($i = 0; $i < count($ops); $i++) {
+    $x = $ids[$i];
+    $y = $ops[$i];
+    $re4 = "/^(>>($x))*/mi";
+    $subst4 = "<a href=\"/$url/$y#$x\">$1</a>";
+    $content = preg_replace($re4, $subst4, $content);
+  }
+
+  $content = $db->real_escape_string($content);
+  $url = $db->real_escape_string($url);
+  $id = $db->real_escape_string($id);
+  $db->query("UPDATE posts_".$url." SET
+  content = '$content'
+  WHERE id = '$id'");
 }
 ?>
 <html>
@@ -47,6 +129,9 @@ else if ($_POST['type'] == "reply") {
 <body>
 <div class="header">
 <?php
+if ($_POST['type'] == "reply") {
+  $id = $_POST['id'];
+}
 $target_dir = "$url/$id/res/";
 $target_file = $target_dir . basename($_FILES["image"]["name"]);
 $uploadOk = 1;
