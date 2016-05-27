@@ -23,7 +23,7 @@ while ($row = $res->fetch_assoc()) {
 }
 echo "<div class=\"recent\">";
 echo "<h3 id=\"latest_posts\">Latest Posts</h3><br/>";
-$re = "/^^(>[a-zA-Z0-9_ ]*$)/mi";
+$re = "/^^(>[a-zA-Z0-9_ \.\,\+\=\-\~\`\!\@\#\$\%\^\&\*\(\)\{\}\[\]\'\;\:\?\|\"\/\\\<\!]*$)/mi";
 $subst = "<p class=\"quote\">$1</p>";
 $re1 = "/^^(>>(\\d+))/mi";
 foreach ($boards as $x) {

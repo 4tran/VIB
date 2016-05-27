@@ -36,7 +36,7 @@ echo "</div><br/><br/>";
 
 <?php
 $url = $board_config['url'];
-$re = "/^^(>[a-zA-Z0-9_ ]*$)/mi";
+$re = "/^^(>[a-zA-Z0-9_ \.\,\+\=\-\~\`\!\@\#\$\%\^\&\*\(\)\{\}\[\]\'\;\:\?\|\"\/\\\<\!]*$)/mi";
 $subst = "<p class=\"quote\">$1</p>";
 $re1 = "/^^(>>(\\d+))/mi";
 $db->real_query("SELECT * FROM posts_".$url." ORDER BY id DESC");
