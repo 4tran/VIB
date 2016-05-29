@@ -6,9 +6,11 @@ $content = $db->real_escape_string($_POST["content"]);
 $op = 0;
 
 $re = "/^^(>[a-zA-Z0-9_ \~\!\@\#\$\%\^\&\*\(\)\+\-\=\`\{\}\|\[\]\\\:\"\;\'\?\,\.\/]*$)/mi";
+$re2 = "/(<.*(.*)>)(.*)(<\\/.*>)$/mi";
 $re1 = "/(<a href=\"(.*)\">(.*)(.*))*$/mi";
 $re3 = "/^(>>(\\d+))*/mi";
 $subst = "<p class=\"quote\">$1</p>";
+$subst2 = "$3";
 $subst1 = "$1";
 
 if($_POST['type'] == "thread") {
@@ -31,7 +33,8 @@ if($_POST['type'] == "thread") {
 
   $str = str_replace("\r\n", "\n", $content);
   $str = str_replace("\r", "\n", $str);
-  $content = preg_replace($re, $subst, $str);
+  $content = preg_replace($re2, $subst2, $str);
+  $content = preg_replace($re, $subst, $content);
   $content = preg_replace($re1, $subst1, $content);
 
   preg_match_all($re3, $content, $matches);
@@ -92,7 +95,8 @@ else if ($_POST['type'] == "reply") {
 
   $str = str_replace("\r\n", "\n", $content);
   $str = str_replace("\r", "\n", $str);
-  $content = preg_replace($re, $subst, $str);
+  $content = preg_replace($re2, $subst2, $str);
+  $content = preg_replace($re, $subst, $content);
   $content = preg_replace($re1, $subst1, $content);
 
   preg_match_all($re3, $content, $matches);
