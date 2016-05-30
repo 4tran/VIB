@@ -15,12 +15,18 @@ while ($row = $res->fetch_assoc()) {
   echo "<a href=\"/" . $row['url'] . "/\">" . "[" . $row['url'] . "]" .  "</a> <p> </p><p> </p>";
 }
 echo "</div><br/><br/>";
+$id = $db->real_escape_string($thread['id']);
+$db->real_query("SELECT content FROM posts_".$url." WHERE id = '$id'");
+$res = $db->use_result();
+while ($row = $res->fetch_assoc()) {
+  $title = $row['content'];
+}
 ?>
 
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="/style/main.css">
-  <?php echo "<title>/" . $board_config['url'] . "/</title>"; ?>
+  <?php echo "<title>" . $title . "</title>"; ?>
 </head>
 <body>
 
