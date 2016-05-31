@@ -87,7 +87,6 @@ for ($i = 0; $i < count($posts); $i++) {
     }
   }
 }
-
 ?>
 <script type="text/javascript" src="/js/image-resize.js"></script>
 <script type="text/javascript" src="/js/quote.js"></script>
