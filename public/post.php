@@ -5,6 +5,7 @@ $name = $db->real_escape_string($_POST["name"]);
 $content = $db->real_escape_string($_POST["content"]);
 $op = 0;
 
+// Regex patterns to allow post filtering, greentext, and post linking.
 $re = "/^^(>[a-zA-Z0-9_ \~\!\@\#\$\%\^\&\*\(\)\+\-\=\`\{\}\|\[\]\\\:\"\;\'\?\,\.\/]*$)/mi";
 $re2 = "/(<.*(.*)>)(.*)(<\\/.*>)$/mi";
 $re1 = "/(<a href=\"(.*)\">(.*)(.*))*$/mi";
