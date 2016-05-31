@@ -28,7 +28,8 @@ foreach ($boards as $x) {
   $db->real_query("SELECT * FROM posts_".$x." ORDER BY timestamp DESC LIMIT 1");
   $res = $db->use_result();
   while ($row = $res->fetch_assoc()) {
-    echo "<p style=\"font-size:110%;\">/$x/ - </p>" . "<p>" . nl2br($row["content"]) . "<a href=\"" . "$x/" . $row['op'] . "\"> [reply]</a></p><br/>";
+    echo "<p style=\"font-size:110%;\">/$x/ - </p>" . "<p>" . nl2br($row["content"])
+    . "<a href=\"" . "$x/" . $row['op'] . "\"> [reply]</a></p><br/>";
   }
 }
 echo "</div>";

@@ -14,7 +14,10 @@ $subst = "<p class=\"quote\">$1</p>";
 $subst2 = "$3";
 $subst1 = "$1";
 
-if ($_FILES["image"]["name"] != "" or $_POST["content"] != "" and strlen($_POST["content"]) <= 2000) {
+if ($_FILES["image"]["name"] != "" or $_POST["content"] != ""
+and strlen($_POST["content"]) <= 2000
+and strlen($_POST["content"]) >= 5
+and preg_match("/(      *)/mi", $_POST["content"]) == false) {
   if($_POST['type'] == "thread") {
     $db->real_query("SELECT id FROM posts_".$url." ORDER BY id DESC LIMIT 1");
     $res = $db->use_result();
@@ -134,6 +137,12 @@ if ($_FILES["image"]["name"] == "" and $_POST["content"] == "") {
 }
 if (strlen($_POST["content"]) > 2000) {
   echo "<div class=\"header\"><p>Post too long.</p></div>";
+}
+if (strlen($_POST["content"]) < 5) {
+  echo "<div class=\"header\"><p>Post too short.</p></div>";
+}
+if (preg_match("/(      *)/mi", $_POST["content"])) {
+  echo "<div class=\"header\"><p>Post rejected as spam.</p></div>";
 }
 ?>
 <html>
