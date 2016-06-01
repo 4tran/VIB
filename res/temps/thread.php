@@ -36,7 +36,7 @@ while ($row = $res->fetch_assoc()) {
 <?php echo "<input type=\"hidden\" name=\"id\" value=\"" . $thread['id'] . "\">"; ?>
 <?php echo "<input type=\"hidden\" name=\"type\" value=\"reply\">"; ?>
 <p>Name: </p><input type="text" name="name" style="margin-bottom:5px"><br/>
-<textarea name="content" rows="5" cols="40" style="margin-bottom:5px"></textarea><br/>
+<textarea name="content" id="content" rows="5" cols="40" style="margin-bottom:5px"></textarea><br/>
 <input type="file" name="image" id="image"><br/>
 <input type="submit" value="Reply">
 </form>
@@ -52,24 +52,28 @@ while ($row = $res->fetch_assoc()) {
       echo "<div class=\"op\">";
       if ($row['name'] == "" && $row['image'] != "") {
         echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
-        . " ID: " . $row['id'] . "</p><br/>";
+        . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">" . $row['id']
+        . "</p>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] != "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: " . htmlspecialchars($row['name'])
-        . ". Created: " . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
+        . ". Created: " . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>"
+        . $row['id'] . "')\">" . $row['id'] . "</p>" . "</p><br/>";
       }
       else if ($row['name'] != "" && $row['image'] != "") {
         echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
 
-        . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
+        . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+        . $row['id'] . "</p>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\"" . $row['id']
         . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] == "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: Anonymous. Created: "
-        . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
+        . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+        . $row['id'] . "</p>" . "</p><br/>";
       }
       echo "<p>" . nl2br($row['content']) . "</p><br/><br/>";
       echo "</div>";
@@ -78,24 +82,28 @@ while ($row = $res->fetch_assoc()) {
       echo "<div class=\"reply\">";
       if ($row['name'] == "" && $row['image'] != "") {
         echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
-        . " ID: " . $row['id'] . "</p><br/>";
+        . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">" . $row['id']
+        . "</p>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] != "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: "
-        . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp'] . " ID: "
-        . $row['id'] . "</p><br/>";
+        . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp']
+        . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">" . $row['id'] . "</p>"
+        . "</p><br/>";
       }
       else if ($row['name'] != "" && $row['image'] != "") {
         echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
-        . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
+        . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+        . $row['id'] . "</p>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] == "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: Anonymous. Created: "
-        . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
+        . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+        . $row['id'] . "</p>" . "</p><br/>";
       }
       echo "<p>" . nl2br($row['content']) . "</p><br/><br/>";
       echo "</div>";

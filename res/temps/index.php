@@ -28,7 +28,7 @@ echo "</div><br/><br/>";
 <?php echo "<input type=\"hidden\" name=\"url\" value=\"" . $board_config['url'] . "\">"; ?>
 <?php echo "<input type=\"hidden\" name=\"type\" value=\"thread\">"; ?>
 <p>Name: </p><input type="text" name="name" style="margin-bottom:5px"><br/>
-<textarea name="content" rows="5" cols="40" style="margin-bottom:5px"></textarea><br/>
+<textarea name="content" id="content" rows="5" cols="40" style="margin-bottom:5px"></textarea><br/>
 <input type="file" name="image" id="image"><br/>
 <input type="submit" value="Post">
 </form>
@@ -48,55 +48,63 @@ for ($i = 0; $i < count($posts); $i++) {
     echo "<div class=\"op\">";
     if ($posts[$i]['name'] == "" && $posts[$i]['image'] != "") {
       echo "<p class=\"info\">By: Anonymous. Created: " . $posts[$i]['timestamp']
-      . " ID: " . $posts[$i]['id'] . "<a href=\"" . $posts[$i]['id']
+      . " ID: " . "<p onclick=\"quote('>>" . $posts[$i]['id'] . "')\">" . $posts[$i]['id']
+      . "</p>" . "<a href=\"" . $posts[$i]['id']
       . "\"> [reply]</a></p><br/>";
       echo "<div class=\"image\"><img src=\"/" . $posts[$i]['image'] . "\" id=\""
       . $posts[$i]['id'] . "\" onclick=\"resize(" . $posts[$i]['id'] . ")\" alt=\"Full Size\"></div>";
     }
     else if ($posts[$i]['name'] != "" && $posts[$i]['image'] == "") {
       echo "<p class=\"info\" id=\"" . $posts[$i]['id'] . "\">By: " . htmlspecialchars($posts[$i]['name'])
-      . ". Created: " . $posts[$i]['timestamp'] . " ID: " . $posts[$i]['id'] . "<a href=\""
+      . ". Created: " . $posts[$i]['timestamp'] . " ID: " . "<p onclick=\"quote('>>"
+      . $posts[$i]['id'] . "')\">" . $posts[$i]['id'] . "</p>" . "<a href=\""
       . $posts[$i]['id'] . "\"> [reply]</a></p><br/>";
     }
     else if ($posts[$i]['name'] != "" && $posts[$i]['image'] != "") {
       echo "<p class=\"info\">By: " . htmlspecialchars($posts[$i]['name']) . ". Created: "
-      . $posts[$i]['timestamp'] . " ID: " . $posts[$i]['id'] . "<a href=\""
+      . $posts[$i]['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $posts[$i]['id']
+      . "')\">" . $posts[$i]['id'] . "</p>" . "<a href=\""
       . $posts[$i]['id'] . "\"> [reply]</a></p><br/>";
       echo "<div class=\"image\"><img src=\"/" . $posts[$i]['image'] . "\" id=\""
       . $posts[$i]['id'] . "\" onclick=\"resize(" . $posts[$i]['id'] . ")\" alt=\"Full Size\"></div>";
     }
     else if ($posts[$i]['name'] == "" && $posts[$i]['image'] == "") {
       echo "<p class=\"info\" id=\"" . $posts[$i]['id'] . "\">By: Anonymous. Created: "
-      . $posts[$i]['timestamp'] . " ID: " . $posts[$i]['id'] . "<a href=\""
+      . $posts[$i]['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $posts[$i]['id']
+      . "')\">" . $posts[$i]['id'] . "</p>" . "<a href=\""
       . $posts[$i]['id'] . "\"> [reply]</a></p><br/>";
     }
     echo "<p>" . nl2br($posts[$i]['content']) . "</p><br/><br/>";
     echo "</div>";
-    $db->real_query("SELECT * FROM posts_".$url." WHERE op = '$op' ORDER BY id DESC LIMIT 3");
+    $db->real_query("SELECT * FROM (SELECT * FROM posts_".$url." WHERE op = '$op' ORDER BY id DESC LIMIT 3) x ORDER BY id ASC");
     $res = $db->use_result();
     while ($row = $res->fetch_assoc()) {
       if ($row['id'] != $op) {
         echo "<div class=\"reply\">";
         if ($row['name'] == "" && $row['image'] != "") {
           echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
-          . " ID: " . $row['id'] . "</p><br/>";
+          . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">" . $row['id']
+          . "</p>" . "</p><br/>";
           echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
           . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
         }
         else if ($row['name'] != "" && $row['image'] == "") {
           echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: "
           . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp']
-          . " ID: " . $row['id'] . "</p><br/>";
+          . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">" . $row['id'] . "</p>"
+          . "</p><br/>";
         }
         else if ($row['name'] != "" && $row['image'] != "") {
           echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
-          . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
+          . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+          . $row['id'] . "</p>" . "</p><br/>";
           echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
           . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
         }
         else if ($row['name'] == "" && $row['image'] == "") {
           echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: Anonymous. Created: "
-          . $row['timestamp'] . " ID: " . $row['id'] . "</p><br/>";
+          . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+          . $row['id'] . "</p>" . "</p><br/>";
         }
         echo "<p>" . nl2br($row['content']) . "</p><br/><br/>";
         echo "</div>";
