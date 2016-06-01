@@ -2,9 +2,14 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: #323232;
   text-align: center;
   color: #CDCDCD;
+  background: #0f0f0f;
+  background: -moz-linear-gradient(top,  #0f0f0f 1%, #323232 18%);
+  background: -webkit-linear-gradient(top,  #0f0f0f 1%,#323232 18%);
+  background: linear-gradient(to bottom,  #0f0f0f 1%,#323232 18%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f0f0f', endColorstr='#323232',GradientType=0 );
+
 }
 p {
   display: inline;
