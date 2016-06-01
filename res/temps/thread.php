@@ -75,7 +75,7 @@ while ($row = $res->fetch_assoc()) {
         . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
         . $row['id'] . "</p>" . "</p><br/>";
       }
-      echo "<p>" . nl2br($row['content']) . "</p><br/><br/>";
+      echo "<p>" . nl2br($row['content']) . "</p>";
       echo "</div>";
     }
     else {
@@ -105,7 +105,7 @@ while ($row = $res->fetch_assoc()) {
         . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
         . $row['id'] . "</p>" . "</p><br/>";
       }
-      echo "<p>" . nl2br($row['content']) . "</p><br/><br/>";
+      echo "<p>" . nl2br($row['content']) . "</p>";
       echo "</div>";
     }
   }

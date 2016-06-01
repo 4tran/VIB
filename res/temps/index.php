@@ -74,7 +74,7 @@ for ($i = 0; $i < count($posts); $i++) {
       . "')\">" . $posts[$i]['id'] . "</p>" . "<a href=\""
       . $posts[$i]['id'] . "\"> [reply]</a></p><br/>";
     }
-    echo "<p>" . nl2br($posts[$i]['content']) . "</p><br/><br/>";
+    echo "<p>" . nl2br($posts[$i]['content']) . "</p>";
     echo "</div>";
     $db->real_query("SELECT * FROM (SELECT * FROM posts_".$url." WHERE op = '$op' ORDER BY id DESC LIMIT 3) x ORDER BY id ASC");
     $res = $db->use_result();
@@ -106,7 +106,7 @@ for ($i = 0; $i < count($posts); $i++) {
           . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
           . $row['id'] . "</p>" . "</p><br/>";
         }
-        echo "<p>" . nl2br($row['content']) . "</p><br/><br/>";
+        echo "<p>" . nl2br($row['content']) . "</p>";
         echo "</div>";
       }
     }

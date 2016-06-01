@@ -1,52 +1,46 @@
-@import url(https://fonts.googleapis.com/css?family=Vollkorn);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 body {
+  font-family: 'Roboto', sans-serif;
   background: #323232;
-  font-family: 'Vollkorn', serif;
   text-align: center;
   color: #CDCDCD;
 }
 p {
-  font-family: 'Vollkorn', serif;
   display: inline;
   color: #CDCDCD;
   text-align: left;
 }
 div.post {
-  font-family: 'Vollkorn', serif;
   border: 1px;
   border-style: solid;
-  border-color: #CDCDCD;
+  border-color: #515151;
   display: inline-block;
-  padding: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
   margin: 0 auto;
   background-color: #1E1E1E;
   text-align: left;
 }
 div.op, div.reply {
-  font-family: 'Vollkorn', serif;
   margin: 10px;
   text-align: left;
 }
 div.reply {
-  font-family: 'Vollkorn', serif;
   margin-left: 20px;
   border: 1px;
   border-style: solid;
-  border-color: #CDCDCD;
+  border-color: #515151;
   width: 30%;
   padding: 5px;
-  padding-bottom: 0px;
   text-align: left;
 }
 div.reply p {
-  font-family: 'Vollkorn', serif;
   width: auto;
   text-align: left;
   word-wrap: break-word;
 }
 div.op {
-  font-family: 'Vollkorn', serif;
   border: 1px;
   border-style: hidden;
   border-color: #CDCDCD;
@@ -55,7 +49,6 @@ div.op {
   text-align: left;
 }
 div.op p {
-  font-family: 'Vollkorn', serif;
   width: auto;
   text-align: left;
   word-wrap: break-word;
@@ -76,9 +69,8 @@ p.quote {
   color: #a2aa5d;
 }
 textarea, input, textarea:focus, input:focus {
-  font-family: 'Vollkorn', serif;
   background: #323232;
-  color: white;
+  color: #CDCDCD;
   border: none;
   outline: 0;
   text-align: left;
@@ -88,7 +80,6 @@ input {
   width: 100%;
 }
 a:link, a:visited, a:hover,a:active {
-  font-family: 'Vollkorn', serif;
   text-decoration: none;
   color: white;
   text-align: left;
@@ -100,17 +91,21 @@ div.recent #latest_posts {
   border-top: 0px;
   border-left: 0px;
   border-right: 0px;
-  border-color: #CDCDCD;
+  border-color: #515151;
   color: #CDCDCD;
   margin: 0px;
 }
 div.recent {
   text-align: left;
-  float: left;
   border: 1px;
   border-style: solid;
-  border-color: #CDCDCD;
+  border-color: #515151;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 0px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+form {
+  margin: 0;
 }
