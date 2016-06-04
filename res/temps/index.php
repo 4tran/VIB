@@ -45,6 +45,7 @@ while ($row = $res->fetch_assoc()) {
 for ($i = 0; $i < count($posts); $i++) {
   if ($posts[$i]['id'] == $posts[$i]['op']) {
     $op = $db->real_escape_string($posts[$i]['op']);
+    echo "<div class=\"line\"></div>";
     echo "<div class=\"op\">";
     if ($posts[$i]['name'] == "" && $posts[$i]['image'] != "") {
       echo "<p class=\"info\">By: Anonymous. Created: " . $posts[$i]['timestamp']

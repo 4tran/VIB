@@ -22,6 +22,7 @@ div.post {
   margin: 0 auto;
   background-color: #1E1E1E;
   text-align: left;
+  margin-bottom: 20px;
 }
 div.op, div.reply {
   margin: 10px;
@@ -109,4 +110,11 @@ div.recent {
 }
 form {
   margin: 0;
+}
+div.line {
+  width: 100%;
+  border: 1px;
+  border-style: solid;
+  border-bottom: 0px;
+  border-color: #515151;
 }
