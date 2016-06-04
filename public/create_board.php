@@ -15,6 +15,7 @@ if ($_POST["user"] == $users[0]["name"] && password_verify($_POST["pass"], $user
   $db->query("DROP TABLE IF EXISTS posts_".$url."");
   $db->query("CREATE TABLE posts_".$url." (
     id int(11) NOT NULL AUTO_INCREMENT,
+    board text NOT NULL,
     name text NOT NULL,
     content text NOT NULL,
     op text NOT NULL,

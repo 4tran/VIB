@@ -28,13 +28,14 @@ $query = "SELECT * FROM " . $boards[0]["TABLE_NAME"];
 for ($i = 1; $i < count($boards); $i++) {
   $query = $query . " UNION SELECT * FROM " . $boards[$i]["TABLE_NAME"];
 }
-$query = $query . " ORDER BY timestamp DESC";
+$query = $query . " ORDER BY timestamp DESC LIMIT 10";
 echo "<div class=\"recent\">";
 echo "<h3 id=\"latest_posts\">Latest Posts</h3><br/>";
 $db->real_query($query);
 $res = $db->use_result();
 while ($row = $res->fetch_assoc()) {
-  echo $row['content'] . "<br/>";
+  echo "<p style=\"font-size:110%;\">/" . $row['board'] . "/ - </p>" . "<p>" . $row["content"]
+    . "<a href=\"" . $row['board'] . "/" . $row['op'] . "\"> [reply]</a></p><br/>";
 }
 echo "</div>";
 ?>
