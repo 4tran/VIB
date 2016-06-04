@@ -6,7 +6,7 @@ $users = array();
 while ($row = $res->fetch_assoc()) {
   $users[] = $row;
 }
-if (($users[0][0] == $_POST["user"]) && (password_verify($_POST["pass"], $users[0][1]))) {
+if ($_POST["user"] == $users[0]["name"] && password_verify($_POST["pass"], $users[0]["password"])) {
   $url = $db->real_escape_string($_POST["url"]);
   $name = $db->real_escape_string($_POST["name"]);
   $db->query("INSERT INTO boards (url, board_name) VALUES

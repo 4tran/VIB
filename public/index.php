@@ -16,21 +16,25 @@ echo "</div><br/><br/>";
 <body>
 <?php
 $boards = array();
-$db->real_query("SELECT url FROM boards");
+$db->real_query("SELECT DISTINCT TABLE_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE COLUMN_NAME IN ('id')
+        AND TABLE_SCHEMA='vib'");
 $res = $db->use_result();
 while ($row = $res->fetch_assoc()) {
-  array_push($boards, $row['url']);
+  $boards[] = $row;
 }
+$query = "SELECT * FROM " . $boards[0]["TABLE_NAME"];
+for ($i = 1; $i < count($boards); $i++) {
+  $query = $query . " UNION SELECT * FROM " . $boards[$i]["TABLE_NAME"];
+}
+$query = $query . " ORDER BY timestamp DESC";
 echo "<div class=\"recent\">";
 echo "<h3 id=\"latest_posts\">Latest Posts</h3><br/>";
-foreach ($boards as $x) {
-  $x = $db->real_escape_string($x);
-  $db->real_query("SELECT * FROM posts_".$x." ORDER BY timestamp DESC LIMIT 1");
-  $res = $db->use_result();
-  while ($row = $res->fetch_assoc()) {
-    echo "<p style=\"font-size:110%;\">/$x/ - </p>" . "<p>" . nl2br($row["content"])
-    . "<a href=\"" . "$x/" . $row['op'] . "\"> [reply]</a></p><br/>";
-  }
+$db->real_query($query);
+$res = $db->use_result();
+while ($row = $res->fetch_assoc()) {
+  echo $row['content'] . "<br/>";
 }
 echo "</div>";
 ?>

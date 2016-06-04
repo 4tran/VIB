@@ -19,70 +19,72 @@ and strlen($_POST["content"]) <= 2000
 and strlen($_POST["content"]) >= 5
 and preg_match("/(      *)/mi", $_POST["content"]) == false) {
   if($_POST['type'] == "thread") {
-    $db->real_query("SELECT id FROM posts_".$url." ORDER BY id DESC LIMIT 1");
-    $res = $db->use_result();
-    while ($row = $res->fetch_assoc()) {
-      $id = $row['id'];
-    }
-    $id++;
-    $id = $db->real_escape_string($id);
-
-    $db->query("INSERT INTO posts_".$url." (name, content, op, timestamp)
-    VALUES ('$name', '$content', '$id', now())");
-
-    $db->real_query("SELECT content FROM posts_".$url." ORDER BY id DESC LIMIT 1");
-    $res = $db->use_result();
-    while ($row = $res->fetch_assoc()) {
-      $content = $row['content'];
-    }
-
-    $str = str_replace("\r\n", "\n", $content);
-    $str = str_replace("\r", "\n", $str);
-    $content = preg_replace($re2, $subst2, $str);
-    $content = preg_replace($re, $subst, $content);
-    $content = preg_replace($re1, $subst1, $content);
-
-    preg_match_all($re3, $content, $matches);
-    $ids = $matches[2];
-    $ops = array();
-    foreach ($ids as $x) {
-      $db->real_query("SELECT op FROM posts_".$url." WHERE id = '$x'");
+    if ($_FILES["image"]["name"] != "") {
+      $db->real_query("SELECT id FROM posts_".$url." ORDER BY id DESC LIMIT 1");
       $res = $db->use_result();
       while ($row = $res->fetch_assoc()) {
-        array_push($ops, $row['op']);
+        $id = $row['id'];
       }
-    }
+      $id++;
+      $id = $db->real_escape_string($id);
 
-    for ($i = 0; $i < count($ops); $i++) {
-      $x = $ids[$i];
-      $y = $ops[$i];
-      $re4 = "/^(>>($x))*/mi";
-      $subst4 = "<a href=\"/$url/$y#$x\">$1</a>";
-      $content = preg_replace($re4, $subst4, $content);
-    }
+      $db->query("INSERT INTO posts_".$url." (name, content, op, timestamp)
+      VALUES ('$name', '$content', '$id', now())");
 
-    $content = $db->real_escape_string($content);
-    $db->query("UPDATE posts_".$url." SET
-    content = '$content'
-    WHERE id = '$id'");
+      $db->real_query("SELECT content FROM posts_".$url." ORDER BY id DESC LIMIT 1");
+      $res = $db->use_result();
+      while ($row = $res->fetch_assoc()) {
+        $content = $row['content'];
+      }
 
-    $url = $_POST['url'];
+      $str = str_replace("\r\n", "\n", $content);
+      $str = str_replace("\r", "\n", $str);
+      $content = preg_replace($re2, $subst2, $str);
+      $content = preg_replace($re, $subst, $content);
+      $content = preg_replace($re1, $subst1, $content);
 
-    if (!file_exists("$url/$id")) {
-      mkdir("$url/$id", 0777, true);
+      preg_match_all($re3, $content, $matches);
+      $ids = $matches[2];
+      $ops = array();
+      foreach ($ids as $x) {
+        $db->real_query("SELECT op FROM posts_".$url." WHERE id = '$x'");
+        $res = $db->use_result();
+        while ($row = $res->fetch_assoc()) {
+          array_push($ops, $row['op']);
+        }
+      }
+
+      for ($i = 0; $i < count($ops); $i++) {
+        $x = $ids[$i];
+        $y = $ops[$i];
+        $re4 = "/^(>>($x))*/mi";
+        $subst4 = "<a href=\"/$url/$y#$x\">$1</a>";
+        $content = preg_replace($re4, $subst4, $content);
+      }
+
+      $content = $db->real_escape_string($content);
+      $db->query("UPDATE posts_".$url." SET
+      content = '$content'
+      WHERE id = '$id'");
+
+      $url = $_POST['url'];
+
+      if (!file_exists("$url/$id")) {
+        mkdir("$url/$id", 0777, true);
+      }
+      if (!file_exists("$url/$id/res")) {
+        mkdir("$url/$id/res", 0777, true);
+      }
+      $t_json = fopen("$url/$id/thread.json", "w");
+      $txt = "{\n";
+      fwrite($t_json, $txt);
+      $txt = '    "id": "' . $id . '"' . "\n";
+      fwrite($t_json, $txt);
+      $txt = "}\n";
+      fwrite($t_json, $txt);
+      fclose($b_conf);
+      copy("../res/temps/thread.php", "$url/$id/index.php");
     }
-    if (!file_exists("$url/$id/res")) {
-      mkdir("$url/$id/res", 0777, true);
-    }
-    $t_json = fopen("$url/$id/thread.json", "w");
-    $txt = "{\n";
-    fwrite($t_json, $txt);
-    $txt = '    "id": "' . $id . '"' . "\n";
-    fwrite($t_json, $txt);
-    $txt = "}\n";
-    fwrite($t_json, $txt);
-    fclose($b_conf);
-    copy("../res/temps/thread.php", "$url/$id/index.php");
   }
   else if ($_POST['type'] == "reply") {
     $id = $db->real_escape_string($_POST["id"]);
@@ -143,6 +145,9 @@ if (strlen($_POST["content"]) < 5) {
 }
 if (preg_match("/(      *)/mi", $_POST["content"])) {
   echo "<div class=\"header\"><p>Post rejected as spam.</p></div>";
+}
+if ($_POST["type"] == "thread" and $_FILES["image"]["name"] == "") {
+  echo "<div class=\"header\"><p>New threads must have an image.</p></div>";
 }
 ?>
 <html>
