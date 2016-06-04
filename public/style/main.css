@@ -4,12 +4,8 @@ body {
   font-family: 'Roboto', sans-serif;
   text-align: center;
   color: #CDCDCD;
-  background: #0f0f0f;
-  background: -moz-linear-gradient(top,  #0f0f0f 1%, #323232 18%);
-  background: -webkit-linear-gradient(top,  #0f0f0f 1%,#323232 18%);
-  background: linear-gradient(to bottom,  #0f0f0f 1%,#323232 18%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f0f0f', endColorstr='#323232',GradientType=0 );
-
+  background-color: #1E1E1E;
+  background-image: linear-gradient(to bottom, #1E1E1E 0%, #1E1E1E 1em, #323232 200px, #323232 100%);
 }
 p {
   display: inline;
