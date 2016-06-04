@@ -1,12 +1,12 @@
 <?php
 require("../res/config.php");
 $db->real_query("SELECT * FROM users");
-$users = array();
 $res = $db->use_result();
+$users = array();
 while ($row = $res->fetch_assoc()) {
-  array_push($users, [$row['name'], $row['password']]);
+  $users[] = $row;
 }
-if (($users[0][0] == $_POST["user"]) && ($users[0][1] == $_POST["pass"])) {
+if (($users[0][0] == $_POST["user"]) && (password_verify($_POST["pass"], $users[0][1]))) {
   $url = $db->real_escape_string($_POST["url"]);
   $name = $db->real_escape_string($_POST["name"]);
   $db->query("INSERT INTO boards (url, board_name) VALUES
