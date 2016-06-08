@@ -28,8 +28,8 @@ and preg_match("/(      *)/mi", $_POST["content"]) == false) {
       $id++;
       $id = $db->real_escape_string($id);
 
-      $db->query("INSERT INTO posts_".$url." (board, name, content, op, timestamp)
-      VALUES ('$url', '$name', '$content', '$id', now())");
+      $db->query("INSERT INTO posts_".$url." (board, name, content, op, timestamp, bump)
+      VALUES ('$url', '$name', '$content', '$id', now(), now())");
 
       $db->real_query("SELECT content FROM posts_".$url." ORDER BY id DESC LIMIT 1");
       $res = $db->use_result();
@@ -90,8 +90,8 @@ and preg_match("/(      *)/mi", $_POST["content"]) == false) {
     $id = $db->real_escape_string($_POST["id"]);
     $url = $db->real_escape_string($_POST["url"]);
     $content = $db->real_escape_string($_POST["content"]);
-    $db->query("INSERT INTO posts_".$url." (board, name, content, op, timestamp)
-    VALUES ('$url', '$name', '$content', '$id', now())");
+    $db->query("INSERT INTO posts_".$url." (board, name, content, op, timestamp, bump)
+    VALUES ('$url', '$name', '$content', '$id', now(), now())");
 
     $bump = 0;
     $bop = 0;
