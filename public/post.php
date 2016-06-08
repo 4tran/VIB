@@ -93,12 +93,22 @@ and preg_match("/(      *)/mi", $_POST["content"]) == false) {
     $db->query("INSERT INTO posts_".$url." (board, name, content, op, timestamp)
     VALUES ('$url', '$name', '$content', '$id', now())");
 
-    $db->real_query("SELECT content, id FROM posts_".$url." ORDER BY id DESC LIMIT 1");
+    $bump = 0;
+    $bop = 0;
+    $db->real_query("SELECT content, id, timestamp, op FROM posts_".$url." ORDER BY id DESC LIMIT 1");
     $res = $db->use_result();
     while ($row = $res->fetch_assoc()) {
       $content = $row['content'];
       $id = $row['id'];
+      $bump = $row['timestamp'];
+      $bop = $row['op'];
     }
+
+    $bump = $db->real_escape_string($bump);
+    $bop = $db->real_escape_string($bop);
+    $db->query("UPDATE posts_".$url." SET
+    bump = '$bump'
+    WHERE id = '$bop'");
 
     $str = str_replace("\r\n", "\n", $content);
     $str = str_replace("\r", "\n", $str);

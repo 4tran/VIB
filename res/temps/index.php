@@ -36,7 +36,7 @@ echo "</div><br/><br/>";
 
 <?php
 $url = $board_config['url'];
-$db->real_query("SELECT * FROM posts_".$url." ORDER BY id DESC");
+$db->real_query("SELECT * FROM posts_".$url." ORDER BY bump DESC");
 $res = $db->use_result();
 $posts = array();
 while ($row = $res->fetch_assoc()) {
