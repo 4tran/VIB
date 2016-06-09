@@ -4,8 +4,7 @@ if (!$db->connect_errno) {
   $db->query("DROP TABLE IF EXISTS boards");
   $db->query("CREATE TABLE boards (
     url text NOT NULL,
-    board_name text NOT NULL,
-    post_count int(11) NOT NULL
+    board_name text NOT NULL
   )");
 
   $db->query("DROP TABLE IF EXISTS users");
