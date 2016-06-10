@@ -52,27 +52,27 @@ while ($row = $res->fetch_assoc()) {
       echo "<div class=\"op\">";
       if ($row['name'] == "" && $row['image'] != "") {
         echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
-        . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">" . $row['id']
+        . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id']
         . "</p>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] != "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: " . htmlspecialchars($row['name'])
-        . ". Created: " . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>"
+        . ". Created: " . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>"
         . $row['id'] . "')\">" . $row['id'] . "</p>" . "</p><br/>";
       }
       else if ($row['name'] != "" && $row['image'] != "") {
         echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
 
-        . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+        . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
         . $row['id'] . "</p>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\"" . $row['id']
         . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] == "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: Anonymous. Created: "
-        . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+        . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
         . $row['id'] . "</p>" . "</p><br/>";
       }
       echo "<p>" . nl2br($row['content']) . "</p>";
@@ -82,7 +82,7 @@ while ($row = $res->fetch_assoc()) {
       echo "<div class=\"reply\">";
       if ($row['name'] == "" && $row['image'] != "") {
         echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
-        . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">" . $row['id']
+        . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id']
         . "</p>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
@@ -90,19 +90,19 @@ while ($row = $res->fetch_assoc()) {
       else if ($row['name'] != "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: "
         . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp']
-        . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">" . $row['id'] . "</p>"
+        . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id'] . "</p>"
         . "</p><br/>";
       }
       else if ($row['name'] != "" && $row['image'] != "") {
         echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
-        . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+        . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
         . $row['id'] . "</p>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] == "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: Anonymous. Created: "
-        . $row['timestamp'] . " ID: " . "<p onclick=\"quote('>>" . $row['id'] . "')\">"
+        . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
         . $row['id'] . "</p>" . "</p><br/>";
       }
       echo "<p>" . nl2br($row['content']) . "</p>";
