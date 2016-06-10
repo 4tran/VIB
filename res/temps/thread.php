@@ -53,27 +53,27 @@ while ($row = $res->fetch_assoc()) {
       if ($row['name'] == "" && $row['image'] != "") {
         echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
         . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id']
-        . "</p>" . "</p><br/>";
+        . "</a>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] != "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: " . htmlspecialchars($row['name'])
         . ". Created: " . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>"
-        . $row['id'] . "')\">" . $row['id'] . "</p>" . "</p><br/>";
+        . $row['id'] . "')\">" . $row['id'] . "</a>" . "</p><br/>";
       }
       else if ($row['name'] != "" && $row['image'] != "") {
         echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
 
         . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
-        . $row['id'] . "</p>" . "</p><br/>";
+        . $row['id'] . "</a>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\"" . $row['id']
         . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] == "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: Anonymous. Created: "
         . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
-        . $row['id'] . "</p>" . "</p><br/>";
+        . $row['id'] . "</a>" . "</p><br/>";
       }
       echo "<p>" . nl2br($row['content']) . "</p>";
       echo "</div>";
@@ -83,27 +83,27 @@ while ($row = $res->fetch_assoc()) {
       if ($row['name'] == "" && $row['image'] != "") {
         echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
         . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id']
-        . "</p>" . "</p><br/>";
+        . "</a>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] != "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: "
         . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp']
-        . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id'] . "</p>"
+        . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id'] . "</a>"
         . "</p><br/>";
       }
       else if ($row['name'] != "" && $row['image'] != "") {
         echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
         . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
-        . $row['id'] . "</p>" . "</p><br/>";
+        . $row['id'] . "</a>" . "</p><br/>";
         echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
         . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
       }
       else if ($row['name'] == "" && $row['image'] == "") {
         echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: Anonymous. Created: "
         . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
-        . $row['id'] . "</p>" . "</p><br/>";
+        . $row['id'] . "</a>" . "</p><br/>";
       }
       echo "<p>" . nl2br($row['content']) . "</p>";
       echo "</div>";

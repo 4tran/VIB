@@ -50,7 +50,7 @@ for ($i = 0; $i < count($posts); $i++) {
     if ($posts[$i]['name'] == "" && $posts[$i]['image'] != "") {
       echo "<p class=\"info\">By: Anonymous. Created: " . $posts[$i]['timestamp']
       . " ID: " . "<a href=\"javascript:quote('>>" . $posts[$i]['id'] . "')\">" . $posts[$i]['id']
-      . "</p>" . "<a href=\"" . $posts[$i]['id']
+      . "</a>" . "<a href=\"" . $posts[$i]['id']
       . "\"> [reply]</a></p><br/>";
       echo "<div class=\"image\"><img src=\"/" . $posts[$i]['image'] . "\" id=\""
       . $posts[$i]['id'] . "\" onclick=\"resize(" . $posts[$i]['id'] . ")\" alt=\"Full Size\"></div>";
@@ -58,13 +58,13 @@ for ($i = 0; $i < count($posts); $i++) {
     else if ($posts[$i]['name'] != "" && $posts[$i]['image'] == "") {
       echo "<p class=\"info\" id=\"" . $posts[$i]['id'] . "\">By: " . htmlspecialchars($posts[$i]['name'])
       . ". Created: " . $posts[$i]['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>"
-      . $posts[$i]['id'] . "')\">" . $posts[$i]['id'] . "</p>" . "<a href=\""
+      . $posts[$i]['id'] . "')\">" . $posts[$i]['id'] . "</a>" . "<a href=\""
       . $posts[$i]['id'] . "\"> [reply]</a></p><br/>";
     }
     else if ($posts[$i]['name'] != "" && $posts[$i]['image'] != "") {
       echo "<p class=\"info\">By: " . htmlspecialchars($posts[$i]['name']) . ". Created: "
       . $posts[$i]['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $posts[$i]['id']
-      . "')\">" . $posts[$i]['id'] . "</p>" . "<a href=\""
+      . "')\">" . $posts[$i]['id'] . "</a>" . "<a href=\""
       . $posts[$i]['id'] . "\"> [reply]</a></p><br/>";
       echo "<div class=\"image\"><img src=\"/" . $posts[$i]['image'] . "\" id=\""
       . $posts[$i]['id'] . "\" onclick=\"resize(" . $posts[$i]['id'] . ")\" alt=\"Full Size\"></div>";
@@ -72,7 +72,7 @@ for ($i = 0; $i < count($posts); $i++) {
     else if ($posts[$i]['name'] == "" && $posts[$i]['image'] == "") {
       echo "<p class=\"info\" id=\"" . $posts[$i]['id'] . "\">By: Anonymous. Created: "
       . $posts[$i]['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $posts[$i]['id']
-      . "')\">" . $posts[$i]['id'] . "</p>" . "<a href=\""
+      . "')\">" . $posts[$i]['id'] . "</a>" . "<a href=\""
       . $posts[$i]['id'] . "\"> [reply]</a></p><br/>";
     }
     echo "<p>" . nl2br($posts[$i]['content']) . "</p>";
@@ -85,27 +85,27 @@ for ($i = 0; $i < count($posts); $i++) {
         if ($row['name'] == "" && $row['image'] != "") {
           echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
           . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id']
-          . "</p>" . "</p><br/>";
+          . "</a>" . "</p><br/>";
           echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
           . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
         }
         else if ($row['name'] != "" && $row['image'] == "") {
           echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: "
           . htmlspecialchars($row['name']) . ". Created: " . $row['timestamp']
-          . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id'] . "</p>"
+          . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id'] . "</a>"
           . "</p><br/>";
         }
         else if ($row['name'] != "" && $row['image'] != "") {
           echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
           . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
-          . $row['id'] . "</p>" . "</p><br/>";
+          . $row['id'] . "</a>" . "</p><br/>";
           echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
           . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
         }
         else if ($row['name'] == "" && $row['image'] == "") {
           echo "<p class=\"info\" id=\"" . $row['id'] . "\">By: Anonymous. Created: "
           . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
-          . $row['id'] . "</p>" . "</p><br/>";
+          . $row['id'] . "</a>" . "</p><br/>";
         }
         echo "<p>" . nl2br($row['content']) . "</p>";
         echo "</div>";
