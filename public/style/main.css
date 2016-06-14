@@ -118,24 +118,16 @@ div.line {
   border-bottom: 0px;
   border-color: #515151;
 }
-
-/* Create New Board */
-
-.board_create input {
+.post input {
   width: auto;
-  margin: 2px 2px 5px 2px;
-  border: 1px solid black;
 }
-.board_create input[type=text]:focus,
-.board_create input[type=password]:focus,
-.board_create input[type=submit]:hover {
-  border: 1px solid white;
+input#image {
+  width: 100%;
 }
-.board_create input[type=submit] {
-  margin: 3px;
-  padding: 3px;
-  cursor: pointer;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  font-size: 1.2em;
+input[type=url]:focus,
+input[type=name]:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=submit]:hover {
+  text-align: left;
 }

@@ -27,7 +27,7 @@ echo "</div><br/><br/>";
 <form action="../post.php" method="post" enctype="multipart/form-data">
 <?php echo "<input type=\"hidden\" name=\"url\" value=\"" . $board_config['url'] . "\">"; ?>
 <?php echo "<input type=\"hidden\" name=\"type\" value=\"thread\">"; ?>
-<p>Name: </p><input type="text" name="name" style="margin-bottom:5px"><br/>
+<label for="name">Name: </label><input type="text" name="name" id="name"><br/>
 <textarea name="content" id="content" rows="5" cols="40" style="margin-bottom:5px"></textarea><br/>
 <input type="file" name="image" id="image"><br/>
 <input type="submit" value="Post">
