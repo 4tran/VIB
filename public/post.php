@@ -7,12 +7,8 @@ $op = 0;
 
 // Regex patterns to allow post filtering, greentext, and post linking.
 $re = "/^^(>[a-zA-Z0-9_ \~\!\@\#\$\%\^\&\*\(\)\+\-\=\`\{\}\|\[\]\\\:\"\;\'\?\,\.\/]*$)/mi";
-$re2 = "/(<.*(.*)>)(.*)(<\\/.*>)$/mi";
-$re1 = "/(<a href=\"(.*)\">(.*)(.*))*$/mi";
 $re3 = "/^(>>(\\d+))*/mi";
 $subst = "<p class=\"quote\">$1</p>";
-$subst2 = "$3";
-$subst1 = "$1";
 
 if ($_FILES["image"]["name"] != "" or $_POST["content"] != ""
 and strlen($_POST["content"]) <= 2000
@@ -37,11 +33,10 @@ and preg_match("/(      *)/mi", $_POST["content"]) == false) {
         $content = $row['content'];
       }
 
-      $str = str_replace("\r\n", "\n", $content);
-      $str = str_replace("\r", "\n", $str);
-      $content = preg_replace($re2, $subst2, $str);
+      $content = str_replace("\r\n", "\n", $content);
+      $content = str_replace("\r", "\n", $content);
+      $content = strip_tags($content);
       $content = preg_replace($re, $subst, $content);
-      $content = preg_replace($re1, $subst1, $content);
 
       preg_match_all($re3, $content, $matches);
       $ids = $matches[2];
@@ -110,11 +105,10 @@ and preg_match("/(      *)/mi", $_POST["content"]) == false) {
     bump = '$bump'
     WHERE id = '$bop'");
 
-    $str = str_replace("\r\n", "\n", $content);
-    $str = str_replace("\r", "\n", $str);
-    $content = preg_replace($re2, $subst2, $str);
+    $content = str_replace("\r\n", "\n", $content);
+    $content = str_replace("\r", "\n", $content);
+    $content = strip_tags($content);
     $content = preg_replace($re, $subst, $content);
-    $content = preg_replace($re1, $subst1, $content);
 
     preg_match_all($re3, $content, $matches);
     $ids = $matches[2];
