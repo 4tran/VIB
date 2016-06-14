@@ -118,3 +118,24 @@ div.line {
   border-bottom: 0px;
   border-color: #515151;
 }
+
+/* Create New Board */
+
+.board_create input {
+  width: auto;
+  margin: 2px 2px 5px 2px;
+  border: 1px solid black;
+}
+.board_create input[type=text]:focus,
+.board_create input[type=password]:focus,
+.board_create input[type=submit]:hover {
+  border: 1px solid white;
+}
+.board_create input[type=submit] {
+  margin: 3px;
+  padding: 3px;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.2em;
+}

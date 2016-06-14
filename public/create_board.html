@@ -1,11 +1,15 @@
 <html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style/main.css">
+  <?php echo "<title> Create New Board - " . $config['site_name'] . "</title>"; ?>
+</head>
 <body>
-<form action="../create_board.php" method="post">
-Board url: <input type="text" name="url" style="margin-bottom:5px"><br/>
-Board name: <input type="text" name="name" style="margin-bottom:5px"><br/><br/>
-Username: <input type="text" name="user" style="margin-bottom:5px"><br/>
-Password: <input type="password" name="pass" style="margin-bottom:5px"><br/>
-<input type="submit">
+<form class="board_create" action="../create_board.php" method="post">
+<label for="url">Board url: </label><input type="text" name="url" id="url"><br/>
+<label for="name">Board name: </label><input type="text" name="name" id="name"><br/><br/>
+<label for="user">Username: </label><input type="text" name="user" id="user"><br/>
+<label for="pass">Password: </label><input type="password" name="pass" id="pass><br/>
+<input type="submit" value="Create Board">
 </form>
 </body>
 </html>
