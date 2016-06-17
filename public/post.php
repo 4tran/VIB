@@ -211,6 +211,33 @@ if ($_FILES["image"]["name"] != "") {
           $db->query("UPDATE posts_".$url." SET
           image = '$image'
           WHERE id = '$id'");
+	  switch($imageFileType) {
+            case 'gif' :
+              $src_img = imagecreatefromgif($target_file);
+              break;
+            case 'png' :
+              $src_img = imagecreatefrompng($target_file);
+              break;
+            case 'jpg' or 'jpeg' :
+              $src_img = imagecreatefromjpeg($target_file);
+              break;
+            default:
+              break;
+          }
+	  $width = 150;
+          $height = 150;
+          list($width_orig, $height_orig) = getimagesize($target_file);
+          $ratio_orig = $width_orig/$height_orig;
+          if ($width/$height > $ratio_orig) {
+            $width = $height*$ratio_orig;
+          }
+          else {
+            $height = $width/$ratio_orig;
+          }
+	  $thumb = imagecreatetruecolor($width, $height);
+	  imagecopyresampled($thumb, $src_img, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+	  imagejpeg($thumb, $target_dir . 'thumb_' . $_FILES["image"]["name"]);
+	  imagedestroy($thumb);
       }
       else {
           echo "<p>There was an error uploading your file.</p><br/>";
