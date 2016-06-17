@@ -1,11 +1,17 @@
-var big = 0;
+var resized = [];
 function resize(id) {
-  if (big == 0) {
-    document.getElementById(id).style.height = "initial";
-    big = 1;
+  if (resized.indexOf(id) == -1) {
+    var re = /(.*)(src=.*)(thumb_)(.*)/gmi;
+    var image = document.getElementById(id).outerHTML;
+    var image = image.replace(re, '$1$2$4');
+    document.getElementById(id).outerHTML = image;
+    resized.push(id);
   }
   else {
-    document.getElementById(id).style.height = "150px";
-    big = 0;
+    var re = /(.*)(src=.*)(\/res\/)(.*)/gmi;
+    var image = document.getElementById(id).outerHTML;
+    var image = image.replace(re, '$1$2$3thumb_$4');
+    document.getElementById(id).outerHTML = image;
+    resized.splice(resized.indexOf(id), 1);
   }
 }

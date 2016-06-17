@@ -52,7 +52,7 @@ for ($i = 0; $i < count($posts); $i++) {
       . " ID: " . "<a href=\"javascript:quote('>>" . $posts[$i]['id'] . "')\">" . $posts[$i]['id']
       . "</a>" . "<a href=\"" . $posts[$i]['id']
       . "\"> [reply]</a></p><br/>";
-      echo "<div class=\"image\"><img src=\"/" . $posts[$i]['image'] . "\" id=\""
+      echo "<div class=\"image\"><img src=\"/" . $posts[$i]['thumb'] . "\" id=\""
       . $posts[$i]['id'] . "\" onclick=\"resize(" . $posts[$i]['id'] . ")\" alt=\"Full Size\"></div>";
     }
     else if ($posts[$i]['name'] != "" && $posts[$i]['image'] == "") {
@@ -66,7 +66,7 @@ for ($i = 0; $i < count($posts); $i++) {
       . $posts[$i]['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $posts[$i]['id']
       . "')\">" . $posts[$i]['id'] . "</a>" . "<a href=\""
       . $posts[$i]['id'] . "\"> [reply]</a></p><br/>";
-      echo "<div class=\"image\"><img src=\"/" . $posts[$i]['image'] . "\" id=\""
+      echo "<div class=\"image\"><img src=\"/" . $posts[$i]['thumb'] . "\" id=\""
       . $posts[$i]['id'] . "\" onclick=\"resize(" . $posts[$i]['id'] . ")\" alt=\"Full Size\"></div>";
     }
     else if ($posts[$i]['name'] == "" && $posts[$i]['image'] == "") {
@@ -86,7 +86,7 @@ for ($i = 0; $i < count($posts); $i++) {
           echo "<p class=\"info\">By: Anonymous. Created: " . $row['timestamp']
           . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">" . $row['id']
           . "</a>" . "</p><br/>";
-          echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
+          echo "<div class=\"image\"><img src=\"/" . $row['thumb'] . "\" id=\""
           . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
         }
         else if ($row['name'] != "" && $row['image'] == "") {
@@ -99,7 +99,7 @@ for ($i = 0; $i < count($posts); $i++) {
           echo "<p class=\"info\">By: " . htmlspecialchars($row['name']) . ". Created: "
           . $row['timestamp'] . " ID: " . "<a href=\"javascript:quote('>>" . $row['id'] . "')\">"
           . $row['id'] . "</a>" . "</p><br/>";
-          echo "<div class=\"image\"><img src=\"/" . $row['image'] . "\" id=\""
+          echo "<div class=\"image\"><img src=\"/" . $row['thumb'] . "\" id=\""
           . $row['id'] . "\" onclick=\"resize(" . $row['id'] . ")\" alt=\"Full Size\"></div>";
         }
         else if ($row['name'] == "" && $row['image'] == "") {

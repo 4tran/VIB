@@ -207,11 +207,7 @@ if ($_FILES["image"]["name"] != "") {
   else {
       if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
           echo "<p>The image ". basename( $_FILES["image"]["name"]). " has been uploaded.</p><br/>";
-          $image = $db->real_escape_string($target_file);
-          $db->query("UPDATE posts_".$url." SET
-          image = '$image'
-          WHERE id = '$id'");
-	  switch($imageFileType) {
+	        switch($imageFileType) {
             case 'gif' :
               $src_img = imagecreatefromgif($target_file);
               break;
@@ -224,7 +220,7 @@ if ($_FILES["image"]["name"] != "") {
             default:
               break;
           }
-	  $width = 150;
+	        $width = 150;
           $height = 150;
           list($width_orig, $height_orig) = getimagesize($target_file);
           $ratio_orig = $width_orig/$height_orig;
@@ -234,10 +230,15 @@ if ($_FILES["image"]["name"] != "") {
           else {
             $height = $width/$ratio_orig;
           }
-	  $thumb = imagecreatetruecolor($width, $height);
-	  imagecopyresampled($thumb, $src_img, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
-	  imagejpeg($thumb, $target_dir . 'thumb_' . $_FILES["image"]["name"]);
-	  imagedestroy($thumb);
+	        $thumb = imagecreatetruecolor($width, $height);
+          imagecopyresampled($thumb, $src_img, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+          imagejpeg($thumb, $target_dir . 'thumb_' . $_FILES["image"]["name"]);
+          imagedestroy($thumb);
+          $image = $db->real_escape_string($target_file);
+          $thumb = $db->real_escape_string($target_dir . 'thumb_' . $_FILES["image"]["name"]);
+          $db->query("UPDATE posts_".$url." SET
+          image = '$image', thumb = '$thumb'
+          WHERE id = '$id'");
       }
       else {
           echo "<p>There was an error uploading your file.</p><br/>";

@@ -20,6 +20,7 @@ if ($_POST["user"] == $users[0]["name"] && password_verify($_POST["pass"], $user
     content text NOT NULL,
     op text NOT NULL,
     image text NOT NULL,
+    thumb text NOT NULL,
     timestamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     bump timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
